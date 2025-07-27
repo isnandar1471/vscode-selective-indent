@@ -56,7 +56,7 @@ jobs:
         run: npx vsce package
 
       - name: Publish to VS Code Marketplace
-        run: npx vsce publish --pat ${{ secrets.VSCE_TOKEN }}
+        run: npx vsce publish --pat ${{ secrets.VSCE_PAT }}
 
       - name: Get .vsix filename
         id: vsix
