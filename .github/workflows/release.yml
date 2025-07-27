@@ -1,0 +1,71 @@
+name: Release and Publish
+
+on:
+  workflow_run:
+    workflows:
+      - "Test"
+    types:
+      - completed
+
+jobs:
+  release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Get version and name from package.json
+        id: meta
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          VSIX_FILE="$NAME-$VERSION.vsix"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "name=$NAME" >> $GITHUB_OUTPUT
+          echo "vsix_file=$VSIX_FILE" >> $GITHUB_OUTPUT
+
+      - name: Check if tag already exists
+        id: tag_check
+        run: |
+          TAG=v${{ steps.meta.outputs.version }}
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG"; then
+            echo "Tag $TAG already exists. Skipping tag creation."
+            echo "skip_tag=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip_tag=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Git tag
+        if: steps.tag_check.outputs.skip_tag == 'false'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag v${{ steps.meta.outputs.version }}
+          git push origin v${{ steps.meta.outputs.version }}
+
+      - name: Package VS Code Extension
+        run: npx vsce package -o ${{ steps.meta.outputs.vsix_file }}
+
+      - name: Upload VSIX to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.meta.outputs.version }}
+          files: ${{ steps.meta.outputs.vsix_file }}
+
+      - name: Publish to VS Code Marketplace
+        run: npx vsce publish ${{ steps.meta.outputs.vsix_file }} --pat ${{ secrets.VSCE_TOKEN }}
+
+      - name: Post release summary
+        run: |
+          echo "✅ Extension v${{ steps.meta.outputs.version }} released and published to the VS Code Marketplace."
+          echo "🔗 GitHub Release: https://github.com/${{ github.repository }}/releases/tag/v${{ steps.meta.outputs.version }}"
