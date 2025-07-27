@@ -63,7 +63,7 @@ jobs:
           files: ${{ steps.meta.outputs.vsix_file }}
 
       - name: Publish to VS Code Marketplace
-        run: npx vsce publish ${{ steps.meta.outputs.vsix_file }} --pat ${{ secrets.VSCE_TOKEN }}
+        run: npx vsce publish ${{ steps.meta.outputs.vsix_file }} --pat ${{ secrets.VSCE_PAT }}
 
       - name: Post release summary
         run: |
