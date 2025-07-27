@@ -8,19 +8,31 @@ Easily convert indentation (tabs <-> spaces) on specific lines or the whole file
 
 ## Installation
 
-You can install Selective Indent from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/) or using the command line:
+You can install Selective Indent from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=isnandar1471.vscode-selective-indent) or using the command line:
 
 ```bash
-code --install-extension your-publisher-id.selective-indent
+code --install-extension isnandar1471.vscode-selective-indent
 ```
-
-> Replace `your-publisher-id.selective-indent` with the actual identifier once published.
 
 ---
 
 ## Demo
 
-![Demo](./assets/demo.gif)
+- With Command Pallete
+
+  ![Demo Command Pallete](./assets/demo-command-pallete.gif)
+
+- With Context Menu
+
+  ![Demo Context Menu](./assets/demo-context-menu.gif)
+
+---
+
+## Features
+
+- Convert indentation between tabs and spaces
+- Supports converting selected lines or entire file
+- Accessible from the Command Palette and context menu
 
 ---
 
@@ -28,10 +40,10 @@ code --install-extension your-publisher-id.selective-indent
 
 | Command                                                           | Description                                   |
 | ----------------------------------------------------------------- | --------------------------------------------- |
-| `vscode-selective-indent.convertSelectedLinesIndentationToSpaces` | Convert selected lines' indentation to spaces |
-| `vscode-selective-indent.convertSelectedLinesIndentationToTabs`   | Convert selected lines' indentation to tabs   |
-| `vscode-selective-indent.convertAllLinesIndentationToSpaces`      | Convert all lines' indentation to spaces      |
-| `vscode-selective-indent.convertAllLinesIndentationToTabs`        | Convert all lines' indentation to tabs        |
+| `vscode-selective-indent.convertSelectedLinesIndentationToSpaces` | Convert selected lines indentation to spaces  |
+| `vscode-selective-indent.convertSelectedLinesIndentationToTabs`   | Convert selected lines indentation to tabs    |
+| `vscode-selective-indent.convertAllLinesIndentationToSpaces`      | Convert all lines indentation to spaces       |
+| `vscode-selective-indent.convertAllLinesIndentationToTabs`        | Convert all lines indentation to tabs         |
 
 ---
 
@@ -51,5 +63,5 @@ Available in [`./LICENSE`](./LICENSE)
 
 ```bash
 npm install -g @vscode/vsce
-vsce publish <major|minor|patch>
+vsce publish
 ```
