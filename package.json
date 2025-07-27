@@ -1,0 +1,71 @@
+{
+  "name": "vscode-selective-indent",
+  "displayName": "Selective Indent",
+  "description": "Easily convert indentation (tabs <-> spaces) on specific lines or the whole file in VSCode.",
+  "publisher": "isnandar1471",
+  "version": "0.0.1",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/isnandar1471/vscode-selective-indent",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isnandar1471/vscode-selective-indent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isnandar1471/vscode-selective-indent/issues",
+    "email": "isnandar.1471@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.101.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-selective-indent.convertSelectedLinesIndentationToSpaces",
+        "title": "Selective Indent: Convert Selected Lines Indentation to Spaces"
+      },
+      {
+        "command": "vscode-selective-indent.convertSelectedLinesIndentationToTabs",
+        "title": "Selective Indent: Convert Selected Lines Indentation to Tabs"
+      },
+      {
+        "command": "vscode-selective-indent.convertAllLinesIndentationToSpaces",
+        "title": "Selective Indent: Convert All Lines Indentation to Spaces"
+      },
+      {
+        "command": "vscode-selective-indent.convertAllLinesIndentationToTabs",
+        "title": "Selective Indent: Convert All Lines Indentation to Tabs"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "deploy": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.101.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.6.0",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3"
+  }
+}
