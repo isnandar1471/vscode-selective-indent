@@ -48,27 +48,35 @@ jobs:
             echo "skip_tag=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Exit if tag already exists
+        if: steps.tag_check.outputs.skip_release == 'true'
+        run: exit 0
+
+      - name: Package VS Code Extension
+        run: npx vsce package
+
+      - name: Publish to VS Code Marketplace
+        run: npx vsce publish --pat ${{ secrets.VSCE_TOKEN }}
+
+      - name: Get .vsix filename
+        id: vsix
+        run: |
+          FILE=$(ls *.vsix | head -n 1)
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+
       - name: Create Git tag
-        if: steps.tag_check.outputs.skip_tag == 'false'
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git tag v${{ steps.meta.outputs.version }}
           git push origin v${{ steps.meta.outputs.version }}
 
-      - name: Package VS Code Extension
-        run: npx vsce package -o ${{ steps.meta.outputs.vsix_file }}
-
       - name: Upload VSIX to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.meta.outputs.version }}
-          files: ${{ steps.meta.outputs.vsix_file }}
-
-      - name: Publish to VS Code Marketplace
-        run: npx vsce publish ${{ steps.meta.outputs.vsix_file }} --pat ${{ secrets.VSCE_PAT }}
+          files: ${{ steps.vsix.outputs.file }}
 
       - name: Post release summary
         run: |
           echo "✅ Extension v${{ steps.meta.outputs.version }} released and published to the VS Code Marketplace."
-          echo "🔗 GitHub Release: https://github.com/${{ github.repository }}/releases/tag/v${{ steps.meta.outputs.version }}"

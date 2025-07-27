@@ -3,7 +3,7 @@
   "displayName": "Selective Indent",
   "description": "Easily convert indentation (tabs <-> spaces) on specific lines or the whole file in VSCode.",
   "publisher": "isnandar1471",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "assets/icon.png",
   "galleryBanner": {
     "color": "#1e1e1e",
@@ -45,7 +45,31 @@
         "command": "vscode-selective-indent.convertAllLinesIndentationToTabs",
         "title": "Selective Indent: Convert All Lines Indentation to Tabs"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "vscode-selective-indent.convertAllLinesIndentationToSpaces",
+          "when": "editorTextFocus",
+          "group": "vscode-selective-indent@1"
+        },
+        {
+          "command": "vscode-selective-indent.convertAllLinesIndentationToTabs",
+          "when": "editorTextFocus",
+          "group": "vscode-selective-indent@2"
+        },
+        {
+          "command": "vscode-selective-indent.convertSelectedLinesIndentationToSpaces",
+          "when": "editorHasSelection",
+          "group": "vscode-selective-indent@3"
+        },
+        {
+          "command": "vscode-selective-indent.convertSelectedLinesIndentationToTabs",
+          "when": "editorHasSelection",
+          "group": "vscode-selective-indent@4"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -53,8 +77,7 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test",
-    "deploy": "vsce publish"
+    "test": "vscode-test"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
