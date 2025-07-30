@@ -18,7 +18,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 			const newText = IndentConverter.tabsToSpaces(text, tabSize);
 
-			edit.replace(range, newText);
+			edit.delete(range);
+			edit.insert(positionStart, newText);
 		}
 	});
 
@@ -35,7 +36,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 			const newText = IndentConverter.spacesToTabs(text, tabSize);
 
-			edit.replace(range, newText);
+			edit.delete(range);
+			edit.insert(positionStart, newText);
 		}
 	});
 
@@ -50,7 +52,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const newText = IndentConverter.tabsToSpaces(text, tabSize);
 
-		edit.replace(range, newText);
+		edit.delete(range);
+		edit.insert(positionStart, newText);
 	});
 
 	const convertAllLinesIndentationToTabs = vscode.commands.registerTextEditorCommand('vscode-selective-indent.convertAllLinesIndentationToTabs', (textEditor, edit) => {
@@ -64,7 +67,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const newText = IndentConverter.spacesToTabs(text, tabSize);
 
-		edit.replace(range, newText);
+		edit.delete(range);
+		edit.insert(positionStart, newText);
 	});
 
 	context.subscriptions.push(convertSelectedLinesIndentationToSpaces);
