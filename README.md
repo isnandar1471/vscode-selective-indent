@@ -1,6 +1,6 @@
 # Selective Indent
 
-<img src="./assets/icon.png" alt="Selective Indent Icon" width="96" />
+<img src="./assets/icon128.png" alt="Selective Indent Icon" width="96" />
 
 Easily convert indentation (tabs <-> spaces) on specific lines or the whole file in VSCode.
 

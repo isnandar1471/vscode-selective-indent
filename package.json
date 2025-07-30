@@ -3,8 +3,8 @@
   "displayName": "Selective Indent",
   "description": "Easily convert indentation (tabs <-> spaces) on specific lines or the whole file in VSCode.",
   "publisher": "isnandar1471",
-  "version": "0.0.4",
-  "icon": "assets/icon.png",
+  "version": "0.0.5",
+  "icon": "assets/icon128.png",
   "galleryBanner": {
     "color": "#1e1e1e",
     "theme": "dark"
