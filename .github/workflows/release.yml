@@ -49,7 +49,7 @@ jobs:
           fi
 
       - name: Exit if tag already exists
-        if: steps.tag_check.outputs.skip_release == 'true'
+        if: steps.tag_check.outputs.skip_tag == 'true'
         run: exit 0
 
       - name: Package VS Code Extension
