@@ -1,28 +1,40 @@
 export class IndentConverter {
-
-  public static tabsToSpaces(text: string, tabSize: number): string {
-    const replaceWith: string = new Array(tabSize + 1).join(' ');
-    const regex = new RegExp('^(\t+)', 'gm');
-
-    const newText: string = text.replace(regex, (match) => {
-      return replaceWith.repeat(match.length);
+  /**
+   * Converts all types of leading indentation (mixed spaces/tabs) into pure spaces.
+   * Standardizes the visual width based on the provided tabSize.
+   */
+  public static toSpaces(text: string, tabSize: number): string {
+    return text.replace(/^[ \t]+/gm, (match) => {
+      const width = this.calculateWidth(match, tabSize);
+      return " ".repeat(width);
     });
-
-    return newText;
   }
 
-  public static spacesToTabs(text: string, tabSize: number): string {
-    const replaceWith: string = '\t';
-    const regex = new RegExp(`^( {${tabSize}})+`, 'gm');
+  /**
+   * Converts all types of leading indentation into tabs.
+   * If the total width is not perfectly divisible by tabSize,
+   * the remainder is appended as spaces to maintain visual alignment.
+   */
+  public static toTabs(text: string, tabSize: number): string {
+    return text.replace(/^[ \t]+/gm, (match) => {
+      const width = this.calculateWidth(match, tabSize);
 
-    const newText: string = text.replace(regex, (match) => {
-      const spaceCount = match.length;
-      const tabCount = Math.floor(spaceCount / tabSize);
+      const tabCount = Math.floor(width / tabSize);
+      const spaceCount = width % tabSize;
 
-      return replaceWith.repeat(tabCount);
+      return "\t".repeat(tabCount) + " ".repeat(spaceCount);
     });
-
-    return newText;
   }
 
+  /**
+   * Calculates the total visual width of an indentation string.
+   * Tabs are weighted as tabSize, and spaces are weighted as 1.
+   */
+  private static calculateWidth(indent: string, tabSize: number): number {
+    let width = 0;
+    for (const char of indent) {
+      width += char === "\t" ? tabSize : 1;
+    }
+    return width;
+  }
 }

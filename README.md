@@ -2,66 +2,40 @@
 
 <img src="./assets/icon128.png" alt="Selective Indent Icon" width="96" />
 
-Easily convert indentation (tabs <-> spaces) on specific lines or the whole file in VSCode.
-
----
+Convert indentation between tabs and spaces on selected lines or entire files.
 
 ## Installation
 
-You can install Selective Indent from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=isnandar1471.vscode-selective-indent) or using the command line:
+Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=isnandar1471.vscode-selective-indent):
 
 ```bash
 code --install-extension isnandar1471.vscode-selective-indent
 ```
 
----
+## Usage
+
+Access from Command Palette or right-click context menu:
+
+| Command | Action |
+|---------|--------|
+| Convert Selected Lines to Spaces | Convert selected lines' indentation to spaces |
+| Convert Selected Lines to Tabs | Convert selected lines' indentation to tabs |
+| Convert All Lines to Spaces | Convert entire file's indentation to spaces |
+| Convert All Lines to Tabs | Convert entire file's indentation to tabs |
 
 ## Demo
 
-- With Command Pallete
+**Command Palette**
 
-  ![Demo Command Pallete](./assets/demo-command-pallete.gif)
+![Demo Command Palette](./assets/demo-command-pallete.gif)
 
-- With Context Menu
+**Context Menu**
 
-  ![Demo Context Menu](./assets/demo-context-menu.gif)
+![Demo Context Menu](./assets/demo-context-menu.gif)
 
----
+## Resources
 
-## Features
+- [Changelog](./CHANGELOG.md)
+- [License](./LICENSE)
+- [Development Guide](./docs/development.md)
 
-- Convert indentation between tabs and spaces
-- Supports converting selected lines or entire file
-- Accessible from the Command Palette and context menu
-
----
-
-## Commands
-
-| Command                                                           | Description                                   |
-| ----------------------------------------------------------------- | --------------------------------------------- |
-| `vscode-selective-indent.convertSelectedLinesIndentationToSpaces` | Convert selected lines indentation to spaces  |
-| `vscode-selective-indent.convertSelectedLinesIndentationToTabs`   | Convert selected lines indentation to tabs    |
-| `vscode-selective-indent.convertAllLinesIndentationToSpaces`      | Convert all lines indentation to spaces       |
-| `vscode-selective-indent.convertAllLinesIndentationToTabs`        | Convert all lines indentation to tabs         |
-
----
-
-## Release Notes
-
-See [`./CHANGELOG.md`](./CHANGELOG.md)
-
----
-
-## License
-
-Available in [`./LICENSE`](./LICENSE)
-
----
-
-## Publishing
-
-```bash
-npm install -g @vscode/vsce
-vsce publish
-```

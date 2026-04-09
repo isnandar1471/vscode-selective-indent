@@ -5,15 +5,15 @@ const watch = process.argv.includes('--watch');
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ['src/extension.ts'],
+    entryPoints: ['src/extension.ts', 'src/test/extension.test.ts'],
     bundle: true,
     format: 'cjs',
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
     platform: 'node',
-    outfile: 'dist/extension.js',
-    external: ['vscode'],
+    outdir: 'out',
+    external: ['vscode', 'mocha'],
     logLevel: 'warning',
     plugins: [
       /* add to the end of plugins array */
@@ -41,7 +41,7 @@ const esbuildProblemMatcherPlugin = {
     build.onEnd(result => {
       result.errors.forEach(({ text, location }) => {
         console.error(`✘ [ERROR] ${text}`);
-        if (location == null) return;
+        if (location === null) {return;}
         console.error(`    ${location.file}:${location.line}:${location.column}:`);
       });
       console.log('[watch] build finished');
