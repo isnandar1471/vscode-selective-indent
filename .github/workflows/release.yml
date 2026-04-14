@@ -116,7 +116,6 @@ jobs:
   publish-vscode:
     needs: release
     runs-on: ubuntu-latest
-    if: secrets.VSCE_PAT != ''
 
     steps:
       - name: Checkout code
@@ -137,6 +136,9 @@ jobs:
           name: vsix-package
 
       - name: Publish to VS Code Marketplace
+        if: env.VSCE_PAT != ''
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: |
           npx vsce publish --packagePath ${{ needs.release.outputs.vsix-file }} --pat ${{ secrets.VSCE_PAT }}
         continue-on-error: true
@@ -154,7 +156,6 @@ jobs:
   publish-ovsx:
     needs: release
     runs-on: ubuntu-latest
-    if: secrets.OVSX_PAT != ''
 
     steps:
       - name: Checkout code
@@ -175,6 +176,9 @@ jobs:
           name: vsix-package
 
       - name: Publish to Open VSX
+        if: env.OVSX_PAT != ''
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
         run: |
           npx ovsx publish ${{ needs.release.outputs.vsix-file }} -p ${{ secrets.OVSX_PAT }}
         continue-on-error: true

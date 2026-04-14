@@ -6,11 +6,12 @@ Convert indentation between tabs and spaces on selected lines or entire files.
 
 ## Installation
 
-Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=isnandar1471.vscode-selective-indent):
+You can install this extension directly from your preferred marketplace:
 
-```bash
-code --install-extension isnandar1471.vscode-selective-indent
-```
+- [**VS Code Marketplace**](https://marketplace.visualstudio.com/items?itemName=isnandar1471.vscode-selective-indent)
+- [**Open VSX Registry**](https://open-vsx.org/extension/isnandar1471/vscode-selective-indent)
+
+Alternatively, search for **"Selective Indent"** in your VS Code Extensions tab.
 
 ## Usage
 
