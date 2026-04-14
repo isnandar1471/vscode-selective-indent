@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - '*.md'
   pull_request:
     branches:
       - main
@@ -26,12 +29,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run linter
-        run: npm run pretest
+        run: npm run lint
+
+      - name: Run type check
+        run: npm run check-types
 
       - name: Setup headless display (Linux only)
         if: runner.os == 'Linux'

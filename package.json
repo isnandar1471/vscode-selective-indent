@@ -3,7 +3,7 @@
   "displayName": "Selective Indent",
   "description": "Easily convert indentation (tabs <-> spaces) on specific lines or the whole file in VSCode.",
   "publisher": "isnandar1471",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "icon": "assets/icon128.png",
   "galleryBanner": {
     "color": "#1e1e1e",
@@ -47,27 +47,36 @@
         "title": "Selective Indent: Convert All Lines Indentation to Tabs"
       }
     ],
+    "submenus": [
+      {
+        "id": "selective-indent-submenu",
+        "label": "Selective Indent"
+      }
+    ],
     "menus": {
       "editor/context": [
         {
+          "submenu": "selective-indent-submenu",
+          "when": "editorTextFocus && !editorReadonly",
+          "group": "vscode-selective-indent"
+        }
+      ],
+      "selective-indent-submenu": [
+        {
           "command": "vscode-selective-indent.convertAllLinesIndentationToSpaces",
-          "when": "editorTextFocus",
-          "group": "vscode-selective-indent@1"
+          "group": "1"
         },
         {
           "command": "vscode-selective-indent.convertAllLinesIndentationToTabs",
-          "when": "editorTextFocus",
-          "group": "vscode-selective-indent@2"
+          "group": "1"
         },
         {
           "command": "vscode-selective-indent.convertSelectedLinesIndentationToSpaces",
-          "when": "editorHasSelection",
-          "group": "vscode-selective-indent@3"
+          "group": "1"
         },
         {
           "command": "vscode-selective-indent.convertSelectedLinesIndentationToTabs",
-          "when": "editorHasSelection",
-          "group": "vscode-selective-indent@4"
+          "group": "1"
         }
       ]
     }
